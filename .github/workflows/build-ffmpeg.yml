@@ -44,6 +44,12 @@ jobs:
           mkdir -p ${ANDROID_SDK_ROOT}/ndk
           wget https://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip
           unzip android-ndk-r22b-linux-x86_64.zip -d ${ANDROID_SDK_ROOT}/ndk
+          echo "ANDROID_NDK_HOME=${ANDROID_SDK_ROOT}/ndk/android-ndk-r22b" >> $GITHUB_ENV
+
+      - name: 验证 NDK 配置
+        run: |
+          ls -l ${ANDROID_SDK_ROOT}/ndk
+          echo "NDK Path: $ANDROID_NDK_HOME"
 
       - name: 构建 FFmpeg-Kit LTS
         run: |
