@@ -31,27 +31,6 @@ jobs:
       - name: 设置 Android SDK
         uses: android-actions/setup-android@v2
 
-      - name: 检查预装 NDK
-        run: |
-          ls -l /usr/local/lib/android/sdk/ndk
-
-      - name: 删除预装 NDK（可选）
-        run: |
-          rm -rf /usr/local/lib/android/sdk/ndk/*
-
-      - name: 下载 Android NDK
-        run: |
-          mkdir -p ${ANDROID_SDK_ROOT}/ndk
-          wget https://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip
-          unzip android-ndk-r22b-linux-x86_64.zip -d ${ANDROID_SDK_ROOT}/ndk
-          echo "ANDROID_NDK_HOME=${ANDROID_SDK_ROOT}/ndk/android-ndk-r22b" >> $GITHUB_ENV
-          export ANDROID_NDK_HOME=${ANDROID_SDK_ROOT}/ndk/android-ndk-r22b
-
-      - name: 验证 NDK 配置
-        run: |
-          ls -l ${ANDROID_SDK_ROOT}/ndk
-          echo "NDK Path: $ANDROID_NDK_HOME"
-
       - name: 构建 FFmpeg-Kit LTS
         run: |
           
@@ -59,7 +38,7 @@ jobs:
           cd ffmpeg-kit
           
           # 构建 LTS 版本，并启用 gmp 和 gnutls 外部库
-          BUILD_OPTIONS="--lts --enable-gmp --enable-openssl --enable-android-media-codec --enable-android-zlib --disable-x86 --disable-arm-v7a"
+          BUILD_OPTIONS="--lts --enable-gmp --enable-openssl --enable-android-media-codec --enable-android-zlib --disable-x86 --disable-arm-v7a --disable-arm-v7a-neon"
           
           # 添加额外的构建选项
           if [[ -n "${{ github.event.inputs.extra_options }}" ]]; then
