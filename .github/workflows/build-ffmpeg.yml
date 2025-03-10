@@ -31,6 +31,13 @@ jobs:
       - name: 设置 Android SDK
         uses: android-actions/setup-android@v2
 
+      - name: 检查预装 NDK
+        run: |
+          ls -l /usr/local/lib/android/sdk/ndk
+      - name: 删除预装 NDK（可选）
+        run: |
+          rm -rf /usr/local/lib/android/sdk/ndk/*
+
       - name: 下载 Android NDK
         run: |
           mkdir -p ${ANDROID_SDK_ROOT}/ndk
