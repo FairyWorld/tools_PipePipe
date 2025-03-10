@@ -34,6 +34,7 @@ jobs:
       - name: 检查预装 NDK
         run: |
           ls -l /usr/local/lib/android/sdk/ndk
+
       - name: 删除预装 NDK（可选）
         run: |
           rm -rf /usr/local/lib/android/sdk/ndk/*
