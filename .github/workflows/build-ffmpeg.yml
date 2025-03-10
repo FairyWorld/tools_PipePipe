@@ -63,12 +63,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ffmpeg-kit-android-lts-aar
-          path: bundle-android-aar-lts/*.aar
+          path: ffmpeg-kit/bundle-android-aar-lts/*.aar
           if-no-files-found: warn
 
       - name: 上传预编译库
         uses: actions/upload-artifact@v4
         with:
           name: ffmpeg-kit-prebuilt-lts
-          path: prebuilt/
+          path: ffmpeg-kit/prebuilt/
           if-no-files-found: warn
