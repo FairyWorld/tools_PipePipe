@@ -14,7 +14,6 @@ body:
     id: checklist
     attributes:
       label: Checklist
-      description: Your issue will be automatically closed if you don't complete this checklist
       options:
         - label: I make sure that there are no existing issues - open or closed - which I could contribute my information to
           required: true
@@ -40,13 +39,22 @@ body:
       label: Frequency
       description: How often does this bug occur?
       options:
-        - Always
-        - Often
-        - Sometimes
-        - Rarely
-        - Only once
+        - Always (100% of the time)
+        - Often (80-90% of the time)
+        - Sometimes (40-60% of the time)
+        - Rarely (10-30% of the time)
+        - Only once (single occurrence)
     validations:
       required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: Device
+      description: What device and Android Version are you using?
+      placeholder: e.g. Pixel 9 Pro, Android 16
+    validations:
+      required: false
 
   - type: textarea
     id: reproduction-steps
@@ -59,16 +67,7 @@ body:
         3. Scroll down to '...'
         4. See error
     validations:
-      required: true
-
-  - type: input
-    id: device
-    attributes:
-      label: Device
-      description: What device are you using?
-      placeholder: e.g. Pixel 9 Pro
-    validations:
-      required: true
+      required: false
 
   - type: textarea
     id: error-report
@@ -78,7 +77,7 @@ body:
       placeholder: Paste your error report here
       render: text
     validations:
-      required: true
+      required: false
 
   - type: textarea
     id: additional-context
