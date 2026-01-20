@@ -45,22 +45,30 @@ jobs:
           distribution: "temurin"
           cache: 'gradle'
 
-      - name: Build debug APK
+      - name: Build Nightly APK
+        env:
+          NIGHTLY_KEYSTORE_FILE: ../../nightly.jks
+          NIGHTLY_KEYSTORE_PASSWORD: ${{ secrets.NIGHTLY_KEYSTORE_PASSWORD }}
+          NIGHTLY_KEY_ALIAS: ${{ secrets.NIGHTLY_KEY_ALIAS }}
+          NIGHTLY_KEY_PASSWORD: ${{ secrets.NIGHTLY_KEY_PASSWORD }}
         run: |
+          if [ -n "${{ secrets.NIGHTLY_KEYSTORE_BASE64 }}" ]; then
+            echo "${{ secrets.NIGHTLY_KEYSTORE_BASE64 }}" | base64 -d > nightly.jks
+          fi
           cd client/android
-          ./gradlew assembleDebug lintDebug --stacktrace -DskipFormatKtlint
+          ./gradlew assembleNightly lintNightly --stacktrace -DskipFormatKtlint
 
       - name: Upload APKs
         uses: actions/upload-artifact@v4
         with:
           name: all-apks-in-one(intermediates)
           retention-days: 1
-          path: client/android/build/outputs/apk/debug/*.apk
+          path: client/android/build/outputs/apk/nightly/*.apk
 
       - name: Output filenames
         id: step-output
         run: |
-          files=$(ls client/android/build/outputs/apk/debug)
+          files=$(ls client/android/build/outputs/apk/nightly)
 
           json_array="["
           first_file=true
