@@ -1,9 +1,12 @@
-cd PipePipeClient
+cd client
 git pull
-git push git@codeberg.org:NullPointerException/PipePipeClient-legacy.git
-cd ../PipePipeExtractor
+git push git@codeberg.org:NullPointerException/PipePipeClient.git
+cd ../extractor
 git pull
-git push git@codeberg.org:NullPointerException/PipePipeExtractor-legacy.git
+git push git@codeberg.org:NullPointerException/PipePipeExtractor.git
+cd ../shared
+git pull
+git push git@codeberg.org:NullPointerException/PipePipeShared.git
 cd ..
 if [ -n "$1" ]; then
     vim fastlane/metadata/android/en-US/changelogs/$1.txt
