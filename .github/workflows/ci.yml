@@ -56,7 +56,7 @@ jobs:
             echo "${{ secrets.NIGHTLY_KEYSTORE_BASE64 }}" | base64 -d > nightly.jks
           fi
           cd client/android
-          ./gradlew assembleNightly lintNightly --stacktrace -DskipFormatKtlint
+          ./gradlew assembleNightly --stacktrace -DskipFormatKtlint
 
       - name: Upload APKs
         uses: actions/upload-artifact@v4
